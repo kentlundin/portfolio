@@ -1,0 +1,180 @@
+/* =========================================================================
+   CUSTOM STYLES & PRINT STYLESHEET
+   ========================================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+body {
+  font-family: var(--font-sans);
+  scroll-behavior: smooth;
+}
+
+code, pre, .font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Glassmorphism effects */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.dark .glass-panel {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(51, 65, 85, 0.6);
+}
+
+/* Subtle glow accents */
+.ambient-glow {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.15;
+}
+
+.dark .ambient-glow {
+  opacity: 0.25;
+}
+
+/* Badge pulse animation */
+@keyframes pulse-ring {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.15); opacity: 0.4; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* Toast Notification Animation */
+.toast-enter {
+  transform: translateY(100%);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.toast-show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* =========================================================================
+   PRINT / PDF RESUME STYLES (Optimized for ATS & Paper)
+   ========================================================================= */
+@media print {
+  /* Hide interactive web elements */
+  nav,
+  header .web-only,
+  #theme-toggle,
+  #hero-ctas,
+  #contact-form-container,
+  #project-filters,
+  #skill-filters,
+  .print\\:hidden,
+  footer,
+  #toast,
+  #project-modal,
+  .ambient-glow,
+  .social-buttons {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+    color: #111827 !important;
+    font-size: 11pt !important;
+    line-height: 1.4 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .container {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0 10mm !important;
+    margin: 0 !important;
+  }
+
+  /* Printable Resume Header */
+  .print-resume-header {
+    display: block !important;
+    border-bottom: 2px solid #111827;
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+  }
+
+  /* Flatten all cards for clean print */
+  .glass-panel,
+  .card-border {
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+
+  h1, h2, h3, h4 {
+    color: #000000 !important;
+    page-break-after: avoid;
+  }
+
+  section {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    page-break-inside: avoid;
+  }
+
+  /* Clean print link appearance */
+  a {
+    color: #111827 !important;
+    text-decoration: none !important;
+  }
+
+  /* Show full skills on print */
+  .skill-badge {
+    border: 1px solid #d1d5db !important;
+    background: #f9fafb !important;
+    color: #111827 !important;
+    display: inline-block !important;
+    padding: 2px 6px !important;
+    margin: 2px !important;
+    font-size: 9pt !important;
+  }
+}
